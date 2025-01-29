@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::parent(~{::title},~{::#content})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.name} +' | SCM | Dashboard'">Dashboard</title>
+</head>
+<body>
+
+<div id="content">
+    <!--sidebar-->
+
+    <div th:if="${user}">
+        <div th:replace="~{user/sidebar::sidebar}"></div>
+    </div>
+
+    <div class="pt-20 sm:pl-64 flex justify-center ">
+        <h1 class="text-5xl">Welcome to dashboard page</h1>
+    </div>
+</div>
+
+</body>
+</html>

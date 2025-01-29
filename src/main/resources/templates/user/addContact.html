@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::parent(~{::title},~{::#content})}" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Contact</title>
+</head>
+<body>
+<div id="content">'
+
+    <!--sidebar-->
+    <div th:if="${user}">
+        <div th:replace="~{user/sidebar::sidebar}"></div>
+    </div>
+
+    <div class="pt-20 sm:pt-28 sm:pl-64 md:pl-80 bg-gray-100">
+        <div class="flex justify-center">
+            <div>
+                <div id="card"
+                     class="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+                    <h1 class="text-2xl flex justify-center font-normal"> Add new contact</h1>
+                    <div th:replace="message::messageBox"></div>
+
+                    <form th:action="@{'/user/contacts/do-addContact'}"
+                          method="post"
+                          enctype="multipart/form-data"
+                          th:object="${contactForm}"
+                    >
+                        <!--name form-->
+                        <div class="mb-4">
+                            <label for="name"
+                                   class="block ml-1 mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-user w-4 h-4"></i>
+                                </div>
+                                <input th:field="*{name}" type="text" id="name"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </div>
+                            <p class="text-red-500 text-sm px-1 "
+                               th:if="${#fields.hasErrors('name')}"
+                               th:errors="*{name}"
+                            ></p>
+                        </div>
+
+                        <!--email field-->
+                        <div class="mb-4">
+                            <label for="email"
+                                   class="block ml-1 mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                Email</label>
+                            <div class="relative ">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-envelope "></i>
+                                </div>
+                                <input th:field="*{email}" type="email" id="email"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       placeholder="name@flowbite.com">
+                            </div>
+                            <p class="text-red-500 text-sm px-1 "
+                               th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}"
+                            ></p>
+                        </div>
+                        <!--                        phoneNumber-->
+                        <div class="mb-4">
+                            <label for="phoneNumber"
+                                   class="block ml-1 mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                Phone No</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <input th:field="*{phoneNumber}" type="tel" id="phoneNumber"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       placeholder="name@flowbite.com">
+                            </div>
+                            <p class="text-red-500 text-sm px-1 "
+                               th:if="${#fields.hasErrors('phoneNumber')}"
+                               th:errors="*{phoneNumber}"
+                            ></p>
+                        </div>
+
+                        <!--                    address-->
+                        <div class="mb-4">
+                            <label for="address"
+                                   class="block ml-1 mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <i class="fa-solid fa-location-dot w-4 h-4"></i>
+                                </div>
+                                <textarea th:field="*{address}"
+                                          id="address"
+                                          class="bg-gray-50 border border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                          placeholder="Address of the contact"
+                                          oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px';"
+                                          style="overflow: hidden; resize: none; height: 44px; "></textarea>
+                            </div>
+                            <p class="text-red-500 text-sm px-1 "
+                               th:if="${#fields.hasErrors('address')}"
+                               th:errors="*{address}"
+                            ></p>
+                        </div>
+
+                        <!--                        social links-->
+                        <div class="flex space-x-3 mb-4">
+
+                            <div class="w-full">
+                                <div><label for="websiteLink"
+                                            class="block ml-1 mb-2  text-sm font-medium text-gray-900 dark:text-white">Website
+                                    Link</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                            <i class="fa-solid fa-globe w-4 h-4"></i>
+                                        </div>
+                                        <input th:field="*{websiteLink}" type="url" id="websiteLink"
+                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               placeholder="name@flowbite.com">
+                                    </div>
+                                </div>
+                                <p class="text-red-500 text-sm px-1 "
+                                   th:if="${#fields.hasErrors('websiteLink')}"
+                                   th:errors="*{websiteLink}"
+                                ></p>
+                            </div>
+                            <div class="w-full ">
+                                <div><label for="linkedinLink"
+                                            class="block ml-1  mb-2 text-sm font-medium text-gray-900 dark:text-white">Linkedin
+                                    link</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                            <i class="fa-brands fa-linkedin w-4 h-4"></i>
+                                        </div>
+                                        <input th:field="*{linkedinLink}" type="url" id="linkedinLink"
+                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               placeholder=""></div>
+                                </div>
+                                <p class="text-red-500 text-sm px-1 "
+                                   th:if="${#fields.hasErrors('linkedinLink')}"
+                                   th:errors="*{linkedinLink}"
+                                ></p>
+                            </div>
+                        </div>
+
+                        <!--                        profile pic-->
+                        <div>
+                            <label class="block ml-1 mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                   for="picture">Upload profile file</label>
+                            <input th:field="*{picture}"
+
+                                   class="block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                   id="picture" type="file">
+
+                            <p class="text-red-500 text-sm px-1 "
+                               th:if="${#fields.hasErrors('picture')}"
+                               th:errors="*{picture}"
+                            ></p>
+                        </div>
+                        <!--                        buttons-->
+                        <div class="button_container flex justify-center space-x-3">
+                            <button class="px-3 py-2 rounded-full bg-blue-500 hover:bg-blue-700 text-white"
+                                    type="submit">Add Contact
+                            </button>
+
+                            <button class="px-3 py-2 rounded-full bg-red-500 hover:bg-red-800 text-white"
+                                    type="reset">Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
