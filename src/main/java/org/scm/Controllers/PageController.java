@@ -60,9 +60,9 @@ public class PageController {
         return "base";
     }
 
-    @RequestMapping("/contact")
+    @RequestMapping("/contact-us")
     public String contact() {
-        return "contact";
+        return "contact-us";
     }
 
     //for register page
