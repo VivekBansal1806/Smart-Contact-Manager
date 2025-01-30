@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind:watch": "npx tailwindcss -i src/main/resources/static/CSS/input.css -o src/main/resources/static/CSS/output.css --watch"
+    "tailwind": "npx tailwindcss -i src/main/resources/static/CSS/input.css -o src/main/resources/static/CSS/output.css"
   },
   "keywords": [],
   "author": "",
